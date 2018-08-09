@@ -1,0 +1,104 @@
+<div class="col-md-12">
+  <div class="page-header">
+    <h2>
+      <%= @vendor.title %>
+    </h2>
+  </div>
+  <div class="table">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>
+            <a>
+              <%= sortable 'title' %>
+            </a>
+          </th>
+          <th>
+            <a>
+              <%= sortable 'stock' %>
+            </a>
+          </th>
+          <th>
+            <a>
+              <%= sortable 'total' %>
+            </a>
+          </th>
+          <th>
+            <a>
+              <%= sortable 'expected_price' %>
+            </a>
+          </th>
+          <th>
+            <a>
+              <%= sortable 'actual_price' %>
+            </a>
+          </th>
+          <th>
+            <a>
+              <%= sortable 'cost' %>
+            </a>
+          </th>
+          <th>
+            <a>
+              <%= sortable 'style' %>
+            </a>
+          </th>
+          <th>
+            <a>Description</a>
+          </th>
+          <th>
+            <%= form_tag(vendor_items_path, method: 'get', class: 'form-search') do %>
+              <%= text_field_tag :q, '', class: "input-medium search-query" %>
+              <%= submit_tag "search", class: 'btn' %>
+            <% end %>
+          </th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @items.each do |item| %>
+          <tr>
+            <td><%= link_to item.title, vendor_item_path(item.vendor_id, item) %></td>
+            <td><%= item.stock %></td>
+            <td><%= item.total %></td>
+            <td><%= number_to_currency(item.expected_price, unit: '¥') %></td>
+            <td><%= number_to_currency(item.actual_price, unit: '¥') %></td>
+            <td><%= number_to_currency(item.cost, unit: '¥') %></td>
+            <td><%= item.style %></td>
+            <td><%= item.description %></td>
+            <td align="center">
+              <div class="btn-group">
+                <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
+                  <span class="glyphicon glyphicon-th-list"></span>
+                  Actions
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                  <li><%= link_to 'Show', vendor_item_path(item.vendor_id, item) %></li>
+                  <% if policy(current_user).edit? %>
+                    <li><%= link_to 'Edit', edit_vendor_item_path(item.vendor_id, item) %></li>
+                  <% end %>
+                  <% if policy(current_user).destroy? %>
+                    <li><%= link_to 'Destroy', vendor_item_path(item.vendor_id, item), method: :delete, data: { confirm: 'Are you sure?' } %></li>
+                  <% end %>
+                </ul>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+        <%= paginate @items %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<br>
+<div class="row">
+  <div class="col-md-12">
+    <div class="btn-group">
+      <%= link_to icon_tag('glyphicon-chevron-left') + ' Vendors', vendors_path, class: "btn btn-default" %>
+      <% if policy(current_user).new? %>
+        <%= link_to icon_tag('glyphicon-plus') + ' New Item', new_vendor_item_path, class: "btn btn-default" %>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,46 @@
+<div class="agent-settings">
+  <div class="col-md-12">
+    <div class="form-group col-md-6">
+      <div class="form-group hide">
+        <%= f.label :vendor_id %>
+        <%= f.text_field :vendor_id, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :title %>
+        <%= f.text_field :title, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :stock %>
+        <%= f.number_field :stock, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :total %>
+        <%= f.number_field :total, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :expected_price %>
+        <%= f.number_field :expected_price, step: :any, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :actual_price %>
+        <%= f.number_field :actual_price, step: :any, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :cost %>
+        <%= f.number_field :cost, step: :any, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :style %>
+        <%= f.number_field :style, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :description %>
+        <%= f.text_field :description, class: 'form-control' %>
+      </div>
+      <br>
+      <div class="actions form-group">
+        <%= f.submit class: "btn btn-success" %>
+      </div>
+    </div>
+  </div>
+</div>

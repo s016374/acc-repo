@@ -1,0 +1,23 @@
+<div class="field">
+  <%= f.label :order_id %>
+  <%= f.text_field :order_id %>
+</div>
+
+<div class="field">
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+</div>
+
+<div class="field">
+  <%= f.label :price %>
+  <%= f.text_field :price, step: :any %>
+</div>
+
+<div class="field">
+  <%= f.label :number %>
+  <%= f.number_field :number %>
+</div>
+
+<div class="actions">
+  <%= f.submit %>
+</div>

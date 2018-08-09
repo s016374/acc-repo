@@ -1,0 +1,32 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Goods</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Price</th>
+      <th>Number</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @goods.each do |good| %>
+      <tr>
+        <td><%= good.title %></td>
+        <td><%= number_to_currency(good.price, unit: '¥') %></td>
+        <td><%= good.number %></td>
+        <td><%= link_to 'Show', order_good_path(good.order_id, good) %></td>
+        <td><%= link_to 'Edit', edit_order_good_path(good.order_id, good) %></td>
+        <td><%= link_to 'Destroy', order_good_path(good.order_id, good), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+  <%= paginate @goods %>
+</table>
+
+<br>
+
+<%= link_to 'New Good', new_order_good_path %>

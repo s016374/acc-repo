@@ -1,0 +1,34 @@
+<div class="col-md-12">
+  <div class="agent-settings">
+    <ul>
+      <h2>
+        <%= @vendor.title %>
+      </h2>
+      <hr>
+      <p>
+        <strong>Phone:</strong>
+        <%= @vendor.phone %>
+      </p>
+      <p>
+        <strong>Address:</strong>
+        <%= @vendor.address %>
+      </p>
+      <p>
+        <strong>Description:</strong>
+        <%= @vendor.description %>
+      </p>
+    </ul>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="btn-group">
+        <%= link_to icon_tag('glyphicon-chevron-left') + ' Back', vendors_path, class: "btn btn-default" %>
+        <% if policy(current_user).edit? %>
+          <%= link_to icon_tag('glyphicon-asterisk') + ' Edit', edit_vendor_path(@vendor), class: "btn btn-default" %>
+        <% end %>
+      </div>
+    </div>
+
+  </div>
+</div>

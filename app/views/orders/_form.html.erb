@@ -1,0 +1,74 @@
+<%= form_for(setup_order(order)) do |f| %>
+  <% if order.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(order.errors.count, "error") %> prohibited this order from being saved:</h2>
+
+      <ul>
+      <% order.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="agent-settings">
+    <div class="col-md-12">
+      <div class="form-group col-md-6">
+        <div class="form-group hide">
+          <%= f.label :is_purchase %>
+          <%= f.text_field :is_purchase, class: 'form-control' %>
+        </div>
+        <div class="form-group">
+          <%= f.label :customer %>
+          <%= f.text_field :customer, class: 'form-control' %>
+        </div>
+        <div class="form-group">
+          <%= f.label :phone %>
+          <%= f.text_field :phone, class: 'form-control' %>
+        </div>
+        <div class="form-group">
+          <%= f.label :address %>
+          <%= f.text_field :address, class: 'form-control' %>
+        </div>
+        <div class="form-group">
+          <%= f.label :comment %>
+          <%= f.text_field :comment, class: 'form-control' %>
+        </div>
+        <hr>
+
+        <h3>Items:</h3>
+        <br>
+        <div class="alert alert-info hide" id="get_item">
+        </div>
+        <%= f.fields_for(:goods) do |good_f| %>
+          <div class="form-group">
+            <%= good_f.label :title %> :
+            <%= good_f.text_field :title, onchange: "selectItem(this)" %>
+          </div>
+
+          <div class="form-group">
+            <%= good_f.label :price %> :
+            <%= good_f.text_field :price %>
+          </div>
+
+          <div class="form-group">
+            <%= good_f.label :number %> :
+            <%= good_f.text_field :number %>
+          </div>
+
+          <% if good_f.object.persisted? %>
+            delete: <%= good_f.check_box :_destroy %>
+            <br>
+          <% end %>
+          <hr>
+        <% end %>
+
+        <div class="actions form-group">
+          <%= f.submit 'add good', name: "add_good", class: "btn btn-primary" %>
+          <%= f.submit 'remove good', name: "remove_good", class: "btn btn-warning" %>
+          <%= f.submit 'Create', class: "btn btn-success" %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

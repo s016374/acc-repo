@@ -1,0 +1,58 @@
+<div class="col-md-12">
+  <div class="agent-settings">
+    <ul>
+      <h2>
+        <%= @order.is_purchase == 1 ? 'Purchase' : 'Order' %>
+      </h2>
+      <hr>
+      <p>
+        <strong>Customer:</strong>
+        <%= @order.customer %>
+      </p>
+      <p>
+        <strong>Phone:</strong>
+        <%= @order.phone %>
+      </p>
+      <p>
+        <strong>Address:</strong>
+        <%= @order.address %>
+      </p>
+      <p>
+        <strong>Comment:</strong>
+        <%= @order.comment %>
+      </p>
+    </ul>
+    <hr>
+    <ul>
+      <h3>Items:</h3>
+      <hr>
+      <% @order.goods.each do |good| %>
+        <p>
+          <strong>title:</strong>
+          <%= good.title %>
+        </p>
+        <p>
+          <strong>price:</strong>
+          <%= number_to_currency(good.price, unit: '¥') %>
+        </p>
+        <p>
+          <strong>number:</strong>
+          <%= good.number %>
+        </p>
+        <hr>
+      <% end %>
+    </ul>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="btn-group">
+        <%= link_to icon_tag('glyphicon-chevron-left') + ' Back', orders_path, class: "btn btn-default" %>
+        <% if policy(current_user).edit? %>
+          <%= link_to icon_tag('glyphicon-asterisk') + ' Edit', edit_order_path(@order), class: "btn btn-default" %>
+        <% end %>
+      </div>
+    </div>
+
+  </div>
+</div>

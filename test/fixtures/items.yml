@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  stock: 1
+  total: 1
+  expected_price: 1
+  actual_price: 1
+  cost: 1
+  type: 1
+  description: MyString
+
+two:
+  title: MyString
+  stock: 1
+  total: 1
+  expected_price: 1
+  actual_price: 1
+  cost: 1
+  type: 1
+  description: MyString

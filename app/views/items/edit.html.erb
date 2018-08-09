@@ -1,0 +1,27 @@
+<div class="col-md-12">
+  <div class="page-header">
+    <h2><%= @vendor.title %> # <%= @item.title %></h2>
+  </div>
+  <%= form_for(@item, url: vendor_item_path) do |f| %>
+    <% if @item.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@item.errors.count, "error") %> prohibited this item from being saved:</h2>
+
+        <ul>
+        <% @item.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <%= render 'form', f: f %>
+  <% end %>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="btn-group">
+        <%= link_to icon_tag('glyphicon-chevron-left') + ' Back', vendor_items_path, class: "btn btn-default" %>
+      </div>
+    </div>
+  </div>
+</div>

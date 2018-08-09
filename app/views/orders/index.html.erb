@@ -1,0 +1,107 @@
+<div class="col-md-12">
+  <div class="page-header">
+    <ul class="nav nav-pills">
+      <li class="active">
+        <%= link_to 'Events', orders_path %>
+      </li>
+      <li>
+        <%= link_to 'Vendors', vendors_path %>
+      </li>
+      <% if policy(current_user).new? %>
+      <li class="pull-right">
+        <div class="btn-group">
+          <%= link_to icon_tag('glyphicon-plus') + ' New Purchase', purchase_orders_path, class: "btn btn-default" %>
+          <%= link_to icon_tag('glyphicon-plus') + ' New Order', new_order_path, class: "btn btn-default" %>
+        </div>
+      </li>
+      <% end %>
+    </ul>
+  </div>
+  <div class="table">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>
+            <a>Date</a>
+          </th>
+          <th>
+            <a>
+              <%= sortable 'customer' %>
+            </a>
+          </th>
+          <th>
+            <a>
+              <%= sortable 'is_purchase', 'Type' %>
+            </a>
+          </th>
+          <th>
+            <a>
+              <%= sortable 'phone' %>
+            </a>
+          </th>
+          <th>
+            <a>
+              <%= sortable 'address' %>
+            </a>
+          </th>
+          <th>
+            <a>
+              <%= sortable 'comment' %>
+            </a>
+          </th>
+          <th>
+            <%= form_tag(orders_path, method: 'get', class: 'form-search') do %>
+              <%= text_field_tag :q, '', class: "input-medium search-query" %>
+              <%= submit_tag "search", class: 'btn' %>
+            <% end %>
+          </th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @orders.each do |order| %>
+          <tr>
+            <td><%= link_to order.created_at.strftime("%y-%m-%d %k:%M"), order_path(order) %></td>
+            <td><%= link_to order.customer, order_path(order) %></td>
+            <td><%= order.is_purchase == 1 ? 'purchase' : 'order' %></td>
+            <td><%= order.phone %></td>
+            <td><%= order.address %></td>
+            <td><%= order.comment %></td>
+            <td align="center">
+              <div class="btn-group">
+                <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
+                  <span class="glyphicon glyphicon-th-list"></span>
+                  Actions
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                  <li><%= link_to 'Show', order %></li>
+                  <% if policy(current_user).edit? %>
+                    <li><%= link_to 'Edit', edit_order_path(order) %></li>
+                  <% end %>
+                  <% if policy(current_user).destroy? %>
+                    <li><%= link_to 'Destroy', order, method: :delete, data: { confirm: 'Are you sure?' } %></li>
+                  <% end %>
+                </ul>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+        <%= paginate @orders %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<% if false %>
+<br>
+<div class="row">
+  <div class="col-md-12">
+    <div class="btn-group">
+      <% if policy(current_user).new? %>
+        <%= link_to icon_tag('glyphicon-plus') + ' New Purchase', purchase_orders_path, class: "btn btn-default" %>
+        <%= link_to icon_tag('glyphicon-plus') + ' New Order', new_order_path, class: "btn btn-default" %>
+      <% end %>
+    </div>
+  </div>
+</div>
+<% end %>

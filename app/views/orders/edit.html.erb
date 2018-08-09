@@ -1,0 +1,14 @@
+<div class="col-md-12">
+  <div class="page-header">
+    <h2>Editing <%= @order.is_purchase == 1 ? 'Purchase' : 'Order' %></h2>
+  </div>
+  <%= render 'form', order: @order %>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="btn-group">
+        <%= link_to icon_tag('glyphicon-chevron-left') + ' Back', orders_path, class: "btn btn-default" %>
+      </div>
+    </div>
+  </div>
+</div>
